@@ -1,6 +1,6 @@
-## go-to-rust (spec-first service conversion)
+## code-to-spec (spec-first service conversion)
 
-This repository is a **spec-driven workflow** for converting a typical Go service (and, in theory, services in other languages) into Rust or another target language by:
+This repository is a **spec-driven workflow** for converting a typical REST API microservice (like in Go-lang or Rust) into a specification:
 
 - Maintaining a **shared logic taxonomy** (Facts) that is stable across implementations.
 - Extracting the **observed behavior** of an existing service into structured specs.
@@ -35,7 +35,7 @@ openspec --version
 **Initialize OpenSpec in this repo:**
 
 ```bash
-cd /path/to/go-to-rust
+cd /path/to/code-to-spec
 openspec init
 ```
 
@@ -48,11 +48,11 @@ Keep this repo clean by adding the legacy codebase as a symlink (so the analysis
 Example:
 
 ```bash
-cd /path/to/go-to-rust
-ln -s /absolute/path/to/your-old-go-service ./legacy-go-service
+cd /path/to/code-to-spec
+ln -s /absolute/path/to/your-orig-service ./legacy-service
 ```
 
-From here on, point the agent at `./legacy-go-service` (or rename it to match your conventions).
+From here on, point the agent at `./legacy-service` (or rename it to match your conventions).
 
 ### Step 1) Review and update service logic taxonomy if needed
 
@@ -66,12 +66,12 @@ Use `FACTS_TAXONOMY.md` as the canonical categorization system for:
 - timeouts and limits
 - events and audit logs
 
-### Step 2) Assess existing Go service behavior (OpenSpec + prompt)
+### Step 2) Assess existing service behavior (OpenSpec + prompt)
 
 Open you favorite IDE with agentic mode. Your first instruction should explicitly point it at the symlinked legacy repo and the prompt to use.
 
 Example instruction:
-- “With openspec: Review my old Go service in `./legacy-go-service` and do what I describe in `prompts/1_CODE_TO_SPEC.md`. Output `ORIG_BEHAVIOR.md` and `ORIG_FACTS.md` into a new folder for that capability.”
+- “With openspec: Review my old Go-lang service in `./legacy-service` and do what I describe in `prompts/1_CODE_TO_SPEC.md`. Output `ORIG_BEHAVIOR.md` and `ORIG_FACTS.md` into a new folder for that capability.”
 
 Output per analyzed capability/module is typically:
 - `ORIG_BEHAVIOR.md`: “what the current service does” (scenarios, primary/error paths)
