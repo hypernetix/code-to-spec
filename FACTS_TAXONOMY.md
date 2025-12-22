@@ -34,12 +34,16 @@ A **Fact** is:
 ### 1.4 ID Format
 
 ```
-F X Y . zzz
-│ │ │   └── sequential atomic fact ID
-│ │ └────── subcategory
-│ └──────── category
-└────────── Fact
+F X YY . ZZZ
+│  │ │    └── sequential atomic fact ID (numeric)
+│  │ └────── subcategory (numeric)
+│  └──────── category (alphabetic)
+└─────────── Fact
 ```
+
+e.g. 
+`FA01.001` - `A` category, `01`st subcategory and `001`st fact
+`FZ11.030` - `Z` category, `11`th subcategory and `030`th fact
 
 **IDs are append-only. Never renumber.**
 
@@ -47,115 +51,115 @@ F X Y . zzz
 
 ## 2. Category Map
 
-### F0 — Context & System Definition
+### FA — Context & System Definition
 
-#### F00 — Overview
+#### FA00 — Overview
 
-- [F00.001] – Service mission statement
-- [F00.002] – Bounded context definition
-- [F00.003] – Non-goals / explicitly unsupported behavior
-- [F00.004] – Service dependencies map
-- [F00.005] – Data ownership boundaries
+- [FA00.001] – Service mission statement
+- [FA00.002] – Bounded context definition
+- [FA00.003] – Non-goals / explicitly unsupported behavior
+- [FA00.004] – Service dependencies map
+- [FA00.005] – Data ownership boundaries
 
-#### F01 — Project Facts
+#### FA01 — Project Facts
 
-- [F01.001] – Programming language & runtime
-- [F01.002] – Project layout conventions
-- [F01.003] – Coding standards
-- [F01.004] – Versioning strategy
-- [F01.005] – Dependency management approach
-- [F01.006] – Code generation tools
+- [FA01.001] – Programming language & runtime
+- [FA01.002] – Project layout conventions
+- [FA01.003] – Coding standards
+- [FA01.004] – Versioning strategy
+- [FA01.005] – Dependency management approach
+- [FA01.006] – Code generation tools
 
-#### F02 — External Dependencies
+#### FA02 — External Dependencies
 
-- [F02.001] – PostgreSQL dependency
-- [F02.002] – Redis dependency
-- [F02.003] – External auth provider
-- [F02.004] – Message queue (Kafka/RabbitMQ/etc.)
-- [F02.005] – Object storage (S3/MinIO/etc.)
-- [F02.006] – External monitoring services
+- [FA02.001] – PostgreSQL dependency
+- [FA02.002] – Redis dependency
+- [FA02.003] – External auth provider
+- [FA02.004] – Message queue (Kafka/RabbitMQ/etc.)
+- [FA02.005] – Object storage (S3/MinIO/etc.)
+- [FA02.006] – External monitoring services
 
-#### F03 — Deployment
+#### FA03 — Deployment
 
-- [F03.001] – Deployment topology
-- [F03.002] – Kubernetes resources
-- [F03.003] – Scaling rules
-- [F03.004] – Health check endpoints
-- [F03.005] – Readiness probe configuration
-- [F03.006] – Liveness probe configuration
-- [F03.007] – Resource limits (CPU/Memory)
-- [F03.008] – Environment-specific configurations
+- [FA03.001] – Deployment topology
+- [FA03.002] – Kubernetes resources
+- [FA03.003] – Scaling rules
+- [FA03.004] – Health check endpoints
+- [FA03.005] – Readiness probe configuration
+- [FA03.006] – Liveness probe configuration
+- [FA03.007] – Resource limits (CPU/Memory)
+- [FA03.008] – Environment-specific configurations
 
-#### F04 — Build
+#### FA04 — Build
 
-- [F04.001] – Build toolchain
-- [F04.002] – CI pipeline
-- [F04.003] – Artifact format
-- [F04.004] – Build optimization flags
-- [F04.005] – Multi-stage build process
-- [F04.006] – Dependency caching strategy
+- [FA04.001] – Build toolchain
+- [FA04.002] – CI pipeline
+- [FA04.003] – Artifact format
+- [FA04.004] – Build optimization flags
+- [FA04.005] – Multi-stage build process
+- [FA04.006] – Dependency caching strategy
 
-#### F05 — Secrets Handling
+#### FA05 — Secrets Handling
 
-- [F05.001] – Secret storage mechanism
-- [F05.002] – Rotation rules
-- [F05.003] – Secret injection method
-- [F05.004] – Encryption at rest for secrets
+- [FA05.001] – Secret storage mechanism
+- [FA05.002] – Rotation rules
+- [FA05.003] – Secret injection method
+- [FA05.004] – Encryption at rest for secrets
 
-#### F06 — Crypto Primitives
+#### FA06 — Crypto Primitives
 
-- [F06.001] – Hashing algorithm
-- [F06.002] – Signing algorithm
-- [F06.003] – Encryption at rest
-- [F06.004] – Key derivation function
-- [F06.005] – Random number generation
+- [FA06.001] – Hashing algorithm
+- [FA06.002] – Signing algorithm
+- [FA06.003] – Encryption at rest
+- [FA06.004] – Key derivation function
+- [FA06.005] – Random number generation
 
-#### F07 — Configuration Management
+#### FA07 — Configuration Management
 
-- [F07.001] – Configuration sources (env vars, files, remote)
-- [F07.002] – Configuration validation rules
-- [F07.003] – Hot reload support
-- [F07.004] – Default values strategy
-- [F07.005] – Feature flags mechanism
+- [FA07.001] – Configuration sources (env vars, files, remote)
+- [FA07.002] – Configuration validation rules
+- [FA07.003] – Hot reload support
+- [FA07.004] – Default values strategy
+- [FA07.005] – Feature flags mechanism
 
-#### F08 — Logging & Tracing
+#### FA08 — Logging & Tracing
 
-- [F08.001] – Log format (JSON/structured/plain)
-- [F08.002] – Log levels and their usage
-- [F08.003] – Distributed tracing implementation
-- [F08.004] – Trace sampling strategy
-- [F08.005] – Log aggregation destination
-- [F08.006] – Sensitive data redaction rules
+- [FA08.001] – Log format (JSON/structured/plain)
+- [FA08.002] – Log levels and their usage
+- [FA08.003] – Distributed tracing implementation
+- [FA08.004] – Trace sampling strategy
+- [FA08.005] – Log aggregation destination
+- [FA08.006] – Sensitive data redaction rules
 
 ---
 
-### F2 — Domain Model
+### FB — Domain Model
 
-#### F20 — Domain Entities
+#### FB00 — Domain Entities
 
-- [F20.001] – User entity
-- [F20.002] – Session entity
-- [F20.003] – AuditLog entity
-- [F20.004] – Entity lifecycle rules
-- [F20.005] – Entity validation rules
-- [F20.006] - Aggregates
+- [FB00.001] – User entity
+- [FB00.002] – Session entity
+- [FB00.003] – AuditLog entity
+- [FB00.004] – Entity lifecycle rules
+- [FB00.005] – Entity validation rules
+- [FB00.006] - Aggregates
 
-#### F21 — Value Objects
+#### FB01 — Value Objects
 
-- [F21.001] – Email value object
-- [F21.002] – PhoneNumber value object
-- [F21.003] – Address value object
-- [F21.004] – Money value object
+- [FB01.001] – Email value object
+- [FB01.002] – PhoneNumber value object
+- [FB01.003] – Address value object
+- [FB01.004] – Money value object
 
-#### F22 — End-to-End Scenarios
+#### FB02 — End-to-End Scenarios
 
 *(These are orchestrations, not APIs)*
 
-- [F22.001] – Create user scenario
-- [F22.002] – Update user scenario
-- [F22.003] – Delete user scenario
-- [F22.004] – Bulk import scenario
-- [F22.005] – Data export scenario
+- [FB02.001] – Create user scenario
+- [FB02.002] – Update user scenario
+- [FB02.003] – Delete user scenario
+- [FB02.004] – Bulk import scenario
+- [FB02.005] – Data export scenario
 
 Each scenario references:
 - REST / gRPC handlers
@@ -163,30 +167,30 @@ Each scenario references:
 - DB operations
 - Events
 
-#### F23 - Formal product-management like feature set
+#### FB03 — Formal Product-Management Features
 
-- [F23.001] - hierarchical multoi-tenancy support
-- [F23.002] - per tenant and per user LLM tokens access quotas
-- [F23.003] - AI chat model selection
-- [F23.003] - AI chat history
+- [FB03.001] - Hierarchical multi-tenancy support
+- [FB03.002] - Per-tenant and per-user LLM tokens access quotas
+- [FB03.003] - AI chat model selection
+- [FB03.004] - AI chat history
 
 ---
 
-### F2 — REST API
+### FC — REST API
 
-#### F20 — REST Handlers (TOP-LEVEL FACT)
+#### FC00 — REST Handlers (TOP-LEVEL FACT)
 
 *Each handler = exactly one Fact*
 
-- [F20.001] – POST /users
-- [F20.002] – GET /users/{id}
-- [F20.003] – DELETE /users/{id}
-- [F20.004] – PUT /users/{id}
-- [F20.005] – PATCH /users/{id}
-- [F20.006] – GET /users (list/search)
-- [F20.007] – GET /health
-- [F20.008] – GET /metrics
-- [F20.009] – GET /ready
+- [FC00.001] – POST /users
+- [FC00.002] – GET /users/{id}
+- [FC00.003] – DELETE /users/{id}
+- [FC00.004] – PUT /users/{id}
+- [FC00.005] – PATCH /users/{id}
+- [FC00.006] – GET /users (list/search)
+- [FC00.007] – GET /health
+- [FC00.008] – GET /metrics
+- [FC00.009] – GET /ready
 
 **Attributes (NOT facts):**
 - local-only params
@@ -200,464 +204,464 @@ Each scenario references:
 - auth facts
 - error facts
 
-#### F21 — REST Request Parameters (SHARED ONLY)
+#### FC01 — REST Request Parameters (SHARED ONLY)
 
-- [F21.001] – tenant_id query parameter
-- [F21.002] – page query parameter
-- [F21.003] – limit query parameter
-- [F21.004] – offset query parameter
-- [F21.005] – sort query parameter
-- [F21.006] – filter query parameter
+- [FC01.001] – tenant_id query parameter
+- [FC01.002] – page query parameter
+- [FC01.003] – limit query parameter
+- [FC01.004] – offset query parameter
+- [FC01.005] – sort query parameter
+- [FC01.006] – filter query parameter
 
-#### F22 — REST Path Parameters
+#### FC02 — REST Path Parameters
 
-- [F22.001] – {id} path parameter format
-- [F22.002] – {tenant_id} path parameter format
-- [F22.003] – Path parameter validation rules
+- [FC02.001] – {id} path parameter format
+- [FC02.002] – {tenant_id} path parameter format
+- [FC02.003] – Path parameter validation rules
 
-#### F23 — REST Request Schemas
+#### FC03 — REST Request Schemas
 
-- [F23.001] – CreateUserRequest
-- [F23.002] – UpdateUserRequest
-- [F23.003] – PatchUserRequest
-- [F23.004] – BulkCreateRequest
-- [F23.005] – SearchRequest
+- [FC03.001] – CreateUserRequest
+- [FC03.002] – UpdateUserRequest
+- [FC03.003] – PatchUserRequest
+- [FC03.004] – BulkCreateRequest
+- [FC03.005] – SearchRequest
 
-#### F24 — REST Request Headers
+#### FC04 — REST Request Headers
 
-- [F24.001] – Authorization
-- [F24.002] – X-Request-Id
-- [F24.003] – Content-Type
-- [F24.004] – Accept
-- [F24.005] – X-Tenant-Id
-- [F24.006] – X-Correlation-Id
-- [F24.007] – User-Agent
+- [FC04.001] – Authorization
+- [FC04.002] – X-Request-Id
+- [FC04.003] – Content-Type
+- [FC04.004] – Accept
+- [FC04.005] – X-Tenant-Id
+- [FC04.006] – X-Correlation-Id
+- [FC04.007] – User-Agent
 
-#### F25 — REST Response Schemas
+#### FC05 — REST Response Schemas
 
-- [F25.001] – UserResponse
-- [F25.002] – ErrorResponse
-- [F25.003] – ValidationErrorResponse
-- [F25.004] – PaginatedResponse
-- [F25.005] – HealthResponse
-- [F25.006] – MetricsResponse
+- [FC05.001] – UserResponse
+- [FC05.002] – ErrorResponse
+- [FC05.003] – ValidationErrorResponse
+- [FC05.004] – PaginatedResponse
+- [FC05.005] – HealthResponse
+- [FC05.006] – MetricsResponse
 
-#### F26 — REST Response Headers
+#### FC06 — REST Response Headers
 
-- [F26.001] – X-Request-Id
-- [F26.002] – Retry-After
-- [F26.003] – X-RateLimit-Limit
-- [F26.004] – X-RateLimit-Remaining
-- [F26.005] – X-RateLimit-Reset
-- [F26.006] – Content-Type
-- [F26.007] – Cache-Control
-- [F26.008] – ETag
+- [FC06.001] – X-Request-Id
+- [FC06.002] – Retry-After
+- [FC06.003] – X-RateLimit-Limit
+- [FC06.004] – X-RateLimit-Remaining
+- [FC06.005] – X-RateLimit-Reset
+- [FC06.006] – Content-Type
+- [FC06.007] – Cache-Control
+- [FC06.008] – ETag
 
-#### F27 — REST Status Codes
+#### FC07 — REST Status Codes
 
-- [F27.001] – 401 Unauthorized
-- [F27.002] – 403 Forbidden
-- [F27.003] – 409 Conflict
-- [F27.004] – 200 OK
-- [F27.005] – 201 Created
-- [F27.006] – 204 No Content
-- [F27.007] – 400 Bad Request
-- [F27.008] – 404 Not Found
-- [F27.009] – 422 Unprocessable Entity
-- [F27.010] – 429 Too Many Requests
-- [F27.011] – 500 Internal Server Error
-- [F27.012] – 503 Service Unavailable
+- [FC07.001] – 401 Unauthorized
+- [FC07.002] – 403 Forbidden
+- [FC07.003] – 409 Conflict
+- [FC07.004] – 200 OK
+- [FC07.005] – 201 Created
+- [FC07.006] – 204 No Content
+- [FC07.007] – 400 Bad Request
+- [FC07.008] – 404 Not Found
+- [FC07.009] – 422 Unprocessable Entity
+- [FC07.010] – 429 Too Many Requests
+- [FC07.011] – 500 Internal Server Error
+- [FC07.012] – 503 Service Unavailable
 
-#### F28 — REST Query Conventions
+#### FC08 — REST Query Conventions
 
-- [F28.001] – Pagination format
-- [F28.002] – Sorting syntax
-- [F28.003] – Filtering DSL
-- [F28.004] – Field selection syntax
-- [F28.005] – Expansion/embedding syntax
+- [FC08.001] – Pagination format
+- [FC08.002] – Sorting syntax
+- [FC08.003] – Filtering DSL
+- [FC08.004] – Field selection syntax
+- [FC08.005] – Expansion/embedding syntax
 
-#### F29 — REST Middleware
+#### FC09 — REST Middleware
 
-- [F29.001] – Request logging middleware
-- [F29.002] – Authentication middleware
-- [F29.003] – Rate limiting middleware
-- [F29.004] – CORS middleware
-- [F29.005] – Compression middleware
-- [F29.006] – Request timeout middleware
-- [F29.007] – Recovery/panic middleware
-
----
-
-### F3 — gRPC API (Mirror of REST)
-
-#### F30 — gRPC Services / Methods
-
-- [F30.001] – UserService.CreateUser
-- [F30.002] – UserService.DeleteUser
-- [F30.003] – UserService.GetUser
-- [F30.004] – UserService.UpdateUser
-- [F30.005] – UserService.ListUsers
-- [F30.006] – HealthService.Check
-- [F30.007] – HealthService.Watch
-
-#### F31 — gRPC Messages
-
-- [F31.001] – CreateUserRequest
-- [F31.002] – UserResponse
-- [F31.003] – UpdateUserRequest
-- [F31.004] – ListUsersRequest
-- [F31.005] – ListUsersResponse
-- [F31.006] – Empty
-
-#### F32 — gRPC Metadata
-
-- [F32.001] – Auth metadata
-- [F32.002] – Correlation ID
-- [F32.003] – Tenant ID metadata
-- [F32.004] – Trace context metadata
-
-#### F33 — gRPC Error Mapping
-
-- [F33.001] – Domain → gRPC status mapping
-- [F33.002] – Error details encoding
-- [F33.003] – Retry policy per error type
-
-#### F34 — gRPC Interceptors
-
-- [F34.001] – Authentication interceptor
-- [F34.002] – Logging interceptor
-- [F34.003] – Metrics interceptor
-- [F34.004] – Recovery interceptor
-- [F34.005] – Validation interceptor
-
-#### F35 — gRPC Connection Management
-
-- [F35.001] – Connection pool configuration
-- [F35.002] – Keep-alive settings
-- [F35.003] – Timeout configuration
-- [F35.004] – Retry policy
+- [FC09.001] – Request logging middleware
+- [FC09.002] – Authentication middleware
+- [FC09.003] – Rate limiting middleware
+- [FC09.004] – CORS middleware
+- [FC09.005] – Compression middleware
+- [FC09.006] – Request timeout middleware
+- [FC09.007] – Recovery/panic middleware
 
 ---
 
-### F4 — Security Model
+### FD — gRPC API (Mirror of REST)
 
-#### F41 — Authentication
+#### FD00 — gRPC Services / Methods
 
-- [F41.001] – JWT authentication
-- [F41.002] – mTLS authentication
-- [F41.003] – API key authentication
-- [F41.004] – OAuth2 flow
-- [F41.005] – Token refresh mechanism
+- [FD00.001] – UserService.CreateUser
+- [FD00.002] – UserService.DeleteUser
+- [FD00.003] – UserService.GetUser
+- [FD00.004] – UserService.UpdateUser
+- [FD00.005] – UserService.ListUsers
+- [FD00.006] – HealthService.Check
+- [FD00.007] – HealthService.Watch
 
-#### F42 — Authorization
+#### FD01 — gRPC Messages
 
-- [F42.001] – Role model
-- [F42.002] – Scope model
-- [F42.003] – ABAC rules
-- [F42.004] – Permission model
-- [F42.005] – Resource ownership rules
+- [FD01.001] – CreateUserRequest
+- [FD01.002] – UserResponse
+- [FD01.003] – UpdateUserRequest
+- [FD01.004] – ListUsersRequest
+- [FD01.005] – ListUsersResponse
+- [FD01.006] – Empty
 
-#### F43 — Security Enforcement
+#### FD02 — gRPC Metadata
 
-- [F43.001] – Auth middleware order
-- [F43.002] – Token validation rules
-- [F43.003] – Rate limiting rules
-- [F43.004] – IP allowlist/blocklist
-- [F43.005] – Request size limits
+- [FD02.001] – Auth metadata
+- [FD02.002] – Correlation ID
+- [FD02.003] – Tenant ID metadata
+- [FD02.004] – Trace context metadata
 
-#### F44 — Security Headers
+#### FD03 — gRPC Error Mapping
 
-- [F44.001] – HSTS configuration
-- [F44.002] – CSP configuration
-- [F44.003] – X-Frame-Options
-- [F44.004] – X-Content-Type-Options
+- [FD03.001] – Domain → gRPC status mapping
+- [FD03.002] – Error details encoding
+- [FD03.003] – Retry policy per error type
 
-#### F45 — Input Validation
+#### FD04 — gRPC Interceptors
 
-- [F45.001] – Request body size limits
-- [F45.002] – Field length constraints
-- [F45.003] – Type validation rules
-- [F45.004] – SQL injection prevention
-- [F45.005] – XSS prevention
-- [F45.006] – Path traversal prevention
+- [FD04.001] – Authentication interceptor
+- [FD04.002] – Logging interceptor
+- [FD04.003] – Metrics interceptor
+- [FD04.004] – Recovery interceptor
+- [FD04.005] – Validation interceptor
 
----
+#### FD05 — gRPC Connection Management
 
-### F5 — Service Layer
-
-#### F50 — Service Methods
-
-- [F50.001] – CreateUser
-- [F50.002] – DeleteUser
-- [F50.003] – GetUser
-- [F50.004] – UpdateUser
-- [F50.005] – ListUsers
-- [F50.006] – SearchUsers
-
-#### F51 — Concurrency Model
-
-- [F51.001] – Worker pool usage
-- [F51.002] – Cancellation propagation
-- [F51.003] – Timeout handling
-- [F51.004] – Goroutine/thread management
-- [F51.005] – Lock/mutex strategy
-- [F51.006] – Async operation patterns
-
-#### F52 — Caching
-
-- [F52.001] – User cache
-- [F52.002] – TTL rules
-- [F52.003] – Cache invalidation strategy
-- [F52.004] – Cache key format
-- [F52.005] – Cache warming strategy
-- [F52.006] – Cache miss handling
-
-#### F53 — Observability
-
-- [F53.001] – user_create_total metric
-- [F53.002] – latency histogram
-- [F53.003] – error_count metric
-- [F53.004] – active_connections gauge
-- [F53.005] – request_duration metric
-- [F53.006] – database_query_duration metric
-
-#### F54 — Error Handling
-
-- [F54.001] – Error type hierarchy
-- [F54.002] – Error wrapping strategy
-- [F54.003] – Retry logic
-- [F54.004] – Circuit breaker configuration
-- [F54.005] – Fallback behavior
-- [F54.006] – Error context enrichment
-
-#### F55 — Business Logic
-
-- [F55.001] – Validation rules
-- [F55.002] – Business constraints
-- [F55.003] – State machine definitions
-- [F55.004] – Workflow orchestration
-- [F55.005] – Compensation logic
-
-#### F56 — Data Transformation
-
-- [F56.001] – DTO to domain mapping
-- [F56.002] – Domain to DTO mapping
-- [F56.003] – Data enrichment rules
-- [F56.004] – Data sanitization rules
+- [FD05.001] – Connection pool configuration
+- [FD05.002] – Keep-alive settings
+- [FD05.003] – Timeout configuration
+- [FD05.004] – Retry policy
 
 ---
 
-### F6 — Outbound Gateways
+### FE — Security Model
 
-#### F60 — HTTP Calls
+#### FE01 — Authentication
 
-- [F60.001] – Call to Billing API
-- [F60.002] – HTTP client configuration
-- [F60.003] – Connection pooling
-- [F60.004] – Timeout configuration
-- [F60.005] – Retry policy
+- [FE01.001] – JWT authentication
+- [FE01.002] – mTLS authentication
+- [FE01.003] – API key authentication
+- [FE01.004] – OAuth2 flow
+- [FE01.005] – Token refresh mechanism
 
-#### F61 — gRPC Calls
+#### FE02 — Authorization
 
-- [F61.001] – Call to Identity Service
-- [F61.002] – Client connection management
-- [F61.003] – Load balancing strategy
-- [F61.004] – Circuit breaker configuration
+- [FE02.001] – Role model
+- [FE02.002] – Scope model
+- [FE02.003] – ABAC rules
+- [FE02.004] – Permission model
+- [FE02.005] – Resource ownership rules
 
-#### F62 — Domain Events
+#### FE03 — Security Enforcement
 
-- [F62.001] – UserCreated
-- [F62.002] – UserUpdated
-- [F62.003] – UserDeleted
-- [F62.004] – Event schema versioning
-- [F62.005] – Event publishing mechanism
+- [FE03.001] – Auth middleware order
+- [FE03.002] – Token validation rules
+- [FE03.003] – Rate limiting rules
+- [FE03.004] – IP allowlist/blocklist
+- [FE03.005] – Request size limits
 
-#### F63 — Audit Events
+#### FE04 — Security Headers
 
-- [F63.001] – UserDeletedAudit
-- [F63.002] – UserCreatedAudit
-- [F63.003] – UserUpdatedAudit
-- [F63.004] – Audit event format
-- [F63.005] – Audit retention policy
+- [FE04.001] – HSTS configuration
+- [FE04.002] – CSP configuration
+- [FE04.003] – X-Frame-Options
+- [FE04.004] – X-Content-Type-Options
 
-#### F64 — Message Queue Integration
+#### FE05 — Input Validation
 
-- [F64.001] – Queue connection configuration
-- [F64.002] – Message serialization format
-- [F64.003] – Dead letter queue handling
-- [F64.004] – Message retry policy
-- [F64.005] – Consumer group configuration
-
-#### F65 — External Service Discovery
-
-- [F65.001] – Service registry integration
-- [F65.002] – DNS resolution strategy
-- [F65.003] – Service endpoint caching
+- [FE05.001] – Request body size limits
+- [FE05.002] – Field length constraints
+- [FE05.003] – Type validation rules
+- [FE05.004] – SQL injection prevention
+- [FE05.005] – XSS prevention
+- [FE05.006] – Path traversal prevention
 
 ---
 
-### F7 — Persistence
+### FF — Service Layer
 
-#### F70 — DB Connectivity
+#### FF00 — Service Methods
 
-- [F70.001] – Connection pool config
-- [F70.002] – Connection timeout
-- [F70.003] – Connection retry logic
-- [F70.004] – Connection health checks
+- [FF00.001] – CreateUser
+- [FF00.002] – DeleteUser
+- [FF00.003] – GetUser
+- [FF00.004] – UpdateUser
+- [FF00.005] – ListUsers
+- [FF00.006] – SearchUsers
 
-#### F71 — Supported Databases
+#### FF01 — Concurrency Model
 
-- [F71.001] – PostgreSQL 14+
-- [F71.002] – MySQL 8+ (if applicable)
-- [F71.003] – SQLite (for testing)
+- [FF01.001] – Worker pool usage
+- [FF01.002] – Cancellation propagation
+- [FF01.003] – Timeout handling
+- [FF01.004] – Goroutine/thread management
+- [FF01.005] – Lock/mutex strategy
+- [FF01.006] – Async operation patterns
 
-#### F72 — DB Access Methods
+#### FF02 — Caching
 
-- [F72.001] – InsertUser
-- [F72.002] – DeleteUserById
-- [F72.003] – UpdateUser
-- [F72.004] – GetUserById
-- [F72.005] – ListUsers
-- [F72.006] – SearchUsers
+- [FF02.001] – User cache
+- [FF02.002] – TTL rules
+- [FF02.003] – Cache invalidation strategy
+- [FF02.004] – Cache key format
+- [FF02.005] – Cache warming strategy
+- [FF02.006] – Cache miss handling
 
-#### F73 — Schemas
+#### FF03 — Observability
 
-- [F73.001] – users table
-- [F73.002] – audit_log table
-- [F73.003] – sessions table
-- [F73.004] – Index definitions
-- [F73.005] – Foreign key constraints
-- [F73.006] – Check constraints
+- [FF03.001] – user_create_total metric
+- [FF03.002] – latency histogram
+- [FF03.003] – error_count metric
+- [FF03.004] – active_connections gauge
+- [FF03.005] – request_duration metric
+- [FF03.006] – database_query_duration metric
 
-#### F74 — Access Filters
+#### FF04 — Error Handling
 
-- [F74.001] – Tenant isolation filter
-- [F74.002] – Soft delete filter
-- [F74.003] – Row-level security policies
+- [FF04.001] – Error type hierarchy
+- [FF04.002] – Error wrapping strategy
+- [FF04.003] – Retry logic
+- [FF04.004] – Circuit breaker configuration
+- [FF04.005] – Fallback behavior
+- [FF04.006] – Error context enrichment
 
-#### F75 — Migrations
+#### FF05 — Business Logic
 
-- [F75.001] – Initial schema
-- [F75.002] – Add indexes
-- [F75.003] – Migration tooling
-- [F75.004] – Rollback strategy
-- [F75.005] – Data migration scripts
+- [FF05.001] – Validation rules
+- [FF05.002] – Business constraints
+- [FF05.003] – State machine definitions
+- [FF05.004] – Workflow orchestration
+- [FF05.005] – Compensation logic
 
-#### F76 — Retention
+#### FF06 — Data Transformation
 
-- [F76.001] – Soft delete policy
-- [F76.002] – Hard delete schedule
-- [F76.003] – Archive strategy
-- [F76.004] – GDPR compliance rules
-
-#### F77 — Fixtures
-
-- [F77.001] – Test users
-- [F77.002] – Test data seeding
-- [F77.003] – Fixture cleanup strategy
-
-#### F78 — Transaction Management
-
-- [F78.001] – Transaction isolation level
-- [F78.002] – Transaction timeout
-- [F78.003] – Nested transaction handling
-- [F78.004] – Savepoint usage
-- [F78.005] – Distributed transaction strategy
-
-#### F79 — Query Optimization
-
-- [F79.001] – Query plan analysis
-- [F79.002] – N+1 query prevention
-- [F79.003] – Batch operation patterns
-- [F79.004] – Prepared statement usage
+- [FF06.001] – DTO to domain mapping
+- [FF06.002] – Domain to DTO mapping
+- [FF06.003] – Data enrichment rules
+- [FF06.004] – Data sanitization rules
 
 ---
 
-### F9 — Triggers & Background Execution
+### FG — Outbound Gateways
 
-#### F90 — Event Subscriptions
+#### FG00 — HTTP Calls
 
-- [F80.001] – UserDeleted event listener
-- [F80.002] – UserCreated event listener
-- [F80.003] – Event handler retry logic
-- [F80.004] – Event ordering guarantees
-- [F80.005] – Event deduplication
+- [FG00.001] – Call to Billing API
+- [FG00.002] – HTTP client configuration
+- [FG00.003] – Connection pooling
+- [FG00.004] – Timeout configuration
+- [FG00.005] – Retry policy
 
-#### F81 — Background Tasks
+#### FG01 — gRPC Calls
 
-- [F81.001] – Cleanup job
-- [F81.002] – Sync scheduler
-- [F81.003] – Report generation job
-- [F81.004] – Data aggregation job
+- [FG01.001] – Call to Identity Service
+- [FG01.002] – Client connection management
+- [FG01.003] – Load balancing strategy
+- [FG01.004] – Circuit breaker configuration
 
-#### F82 — Scheduled Jobs
+#### FG02 — Domain Events
 
-- [F82.001] – Cron schedule format
-- [F82.002] – Job locking mechanism
-- [F82.003] – Job failure handling
-- [F82.004] – Job monitoring
+- [FG02.001] – UserCreated
+- [FG02.002] – UserUpdated
+- [FG02.003] – UserDeleted
+- [FG02.004] – Event schema versioning
+- [FG02.005] – Event publishing mechanism
 
-#### F83 — Async Processing
+#### FG03 — Audit Events
 
-- [F83.001] – Task queue configuration
-- [F83.002] – Worker pool sizing
-- [F83.003] – Priority queue handling
-- [F83.004] – Task timeout configuration
+- [FG03.001] – UserDeletedAudit
+- [FG03.002] – UserCreatedAudit
+- [FG03.003] – UserUpdatedAudit
+- [FG03.004] – Audit event format
+- [FG03.005] – Audit retention policy
+
+#### FG04 — Message Queue Integration
+
+- [FG04.001] – Queue connection configuration
+- [FG04.002] – Message serialization format
+- [FG04.003] – Dead letter queue handling
+- [FG04.004] – Message retry policy
+- [FG04.005] – Consumer group configuration
+
+#### FG05 — External Service Discovery
+
+- [FG05.001] – Service registry integration
+- [FG05.002] – DNS resolution strategy
+- [FG05.003] – Service endpoint caching
 
 ---
 
-### F9 — Tests
+### FH — Persistence
 
-#### F90 — Unit Tests
+#### FH00 — DB Connectivity
 
-- [F80.001] – User service tests
-- [F80.002] – Handler tests
-- [F80.003] – Repository tests
-- [F80.004] – Test coverage requirements
-- [F80.005] – Mock/stub strategy
+- [FH00.001] – Connection pool config
+- [FH00.002] – Connection timeout
+- [FH00.003] – Connection retry logic
+- [FH00.004] – Connection health checks
 
-#### F71 — End-to-End Tests
+#### FH01 — Supported Databases
 
-- [F81.001] – Create user flow
-- [F81.002] – Update user flow
-- [F81.003] – Delete user flow
-- [F81.004] – Test environment setup
-- [F81.005] – Test data management
+- [FH01.001] – PostgreSQL 14+
+- [FH01.002] – MySQL 8+ (if applicable)
+- [FH01.003] – SQLite (for testing)
 
-#### F72 — Performance Tests
+#### FH02 — DB Access Methods
 
-- [F82.001] – User creation load test
-- [F82.002] – Read throughput test
-- [F82.003] – Concurrent user test
-- [F82.004] – Performance baseline metrics
+- [FH02.001] – InsertUser
+- [FH02.002] – DeleteUserById
+- [FH02.003] – UpdateUser
+- [FH02.004] – GetUserById
+- [FH02.005] – ListUsers
+- [FH02.006] – SearchUsers
 
-#### F73 — Security Tests
+#### FH03 — Schemas
 
-- [F83.001] – Auth bypass test
-- [F83.002] – SQL injection test
-- [F83.003] – XSS test
-- [F83.004] – CSRF test
-- [F83.005] – Rate limiting test
+- [FH03.001] – users table
+- [FH03.002] – audit_log table
+- [FH03.003] – sessions table
+- [FH03.004] – Index definitions
+- [FH03.005] – Foreign key constraints
+- [FH03.006] – Check constraints
 
-#### F74 — Integration Tests
+#### FH04 — Access Filters
 
-- [F84.001] – Database integration tests
-- [F84.002] – External API integration tests
-- [F84.003] – Message queue integration tests
-- [F84.004] – Cache integration tests
+- [FH04.001] – Tenant isolation filter
+- [FH04.002] – Soft delete filter
+- [FH04.003] – Row-level security policies
 
-#### F75 — Contract Tests
+#### FH05 — Migrations
 
-- [F85.001] – API contract tests
-- [F85.002] – Event schema tests
-- [F85.003] – Consumer-driven contract tests
+- [FH05.001] – Initial schema
+- [FH05.002] – Add indexes
+- [FH05.003] – Migration tooling
+- [FH05.004] – Rollback strategy
+- [FH05.005] – Data migration scripts
 
-#### F76 — Chaos Tests
+#### FH06 — Retention
 
-- [F86.001] – Network failure simulation
-- [F86.002] – Database failure simulation
-- [F86.003] – Dependency failure simulation
-- [F86.004] – Resource exhaustion tests
+- [FH06.001] – Soft delete policy
+- [FH06.002] – Hard delete schedule
+- [FH06.003] – Archive strategy
+- [FH06.004] – GDPR compliance rules
+
+#### FH07 — Fixtures
+
+- [FH07.001] – Test users
+- [FH07.002] – Test data seeding
+- [FH07.003] – Fixture cleanup strategy
+
+#### FH08 — Transaction Management
+
+- [FH08.001] – Transaction isolation level
+- [FH08.002] – Transaction timeout
+- [FH08.003] – Nested transaction handling
+- [FH08.004] – Savepoint usage
+- [FH08.005] – Distributed transaction strategy
+
+#### FH09 — Query Optimization
+
+- [FH09.001] – Query plan analysis
+- [FH09.002] – N+1 query prevention
+- [FH09.003] – Batch operation patterns
+- [FH09.004] – Prepared statement usage
+
+---
+
+### FI — Triggers & Background Execution
+
+#### FI00 — Event Subscriptions
+
+- [FI00.001] – UserDeleted event listener
+- [FI00.002] – UserCreated event listener
+- [FI00.003] – Event handler retry logic
+- [FI00.004] – Event ordering guarantees
+- [FI00.005] – Event deduplication
+
+#### FI01 — Background Tasks
+
+- [FI01.001] – Cleanup job
+- [FI01.002] – Sync scheduler
+- [FI01.003] – Report generation job
+- [FI01.004] – Data aggregation job
+
+#### FI02 — Scheduled Jobs
+
+- [FI02.001] – Cron schedule format
+- [FI02.002] – Job locking mechanism
+- [FI02.003] – Job failure handling
+- [FI02.004] – Job monitoring
+
+#### FI03 — Async Processing
+
+- [FI03.001] – Task queue configuration
+- [FI03.002] – Worker pool sizing
+- [FI03.003] – Priority queue handling
+- [FI03.004] – Task timeout configuration
+
+---
+
+### FJ — Tests
+
+#### FJ00 — Unit Tests
+
+- [FJ00.001] – User service tests
+- [FJ00.002] – Handler tests
+- [FJ00.003] – Repository tests
+- [FJ00.004] – Test coverage requirements
+- [FJ00.005] – Mock/stub strategy
+
+#### FJ01 — End-to-End Tests
+
+- [FJ01.001] – Create user flow
+- [FJ01.002] – Update user flow
+- [FJ01.003] – Delete user flow
+- [FJ01.004] – Test environment setup
+- [FJ01.005] – Test data management
+
+#### FJ02 — Performance Tests
+
+- [FJ02.001] – User creation load test
+- [FJ02.002] – Read throughput test
+- [FJ02.003] – Concurrent user test
+- [FJ02.004] – Performance baseline metrics
+
+#### FJ03 — Security Tests
+
+- [FJ03.001] – Auth bypass test
+- [FJ03.002] – SQL injection test
+- [FJ03.003] – XSS test
+- [FJ03.004] – CSRF test
+- [FJ03.005] – Rate limiting test
+
+#### FJ04 — Integration Tests
+
+- [FJ04.001] – Database integration tests
+- [FJ04.002] – External API integration tests
+- [FJ04.003] – Message queue integration tests
+- [FJ04.004] – Cache integration tests
+
+#### FJ05 — Contract Tests
+
+- [FJ05.001] – API contract tests
+- [FJ05.002] – Event schema tests
+- [FJ05.003] – Consumer-driven contract tests
+
+#### FJ06 — Chaos Tests
+
+- [FJ06.001] – Network failure simulation
+- [FJ06.002] – Database failure simulation
+- [FJ06.003] – Dependency failure simulation
+- [FJ06.004] – Resource exhaustion tests
 
 
 ---
@@ -673,7 +677,7 @@ Each scenario references:
 
 ### 3.2 Referencing Facts
 
-- Always use Fact IDs (e.g., F20.001) when referencing
+- Always use Fact IDs (e.g., FC00.001) when referencing
 - Never duplicate fact content inline
 - Maintain a clear dependency graph
 
@@ -691,7 +695,7 @@ When migrating from one language to another:
 ### 3.4 Maintenance
 
 - Review facts quarterly for accuracy
-- Add new categories as needed (F20+)
+- Add new categories as needed (FK, FL, etc.)
 - Mark deprecated facts but never delete them
 - Version the taxonomy document itself
 
@@ -701,7 +705,7 @@ When migrating from one language to another:
 
 The following areas may need facts depending on your service:
 
-- **GraphQL API** (if applicable) - would be F3X series
+- **GraphQL API** (if applicable) - would be FK series
 - **WebSocket/SSE** handlers - real-time communication
 - [File upload/download** handling
 - **Multi-tenancy** isolation mechanisms
@@ -723,6 +727,7 @@ The following areas may need facts depending on your service:
 
 ```markdown
 **F[CATEGORY][SUBCATEGORY].[ID]** – [Name]
+(e.g., FC00.001, FE01.005)
 
 **Description:** [What this fact represents]
 
@@ -731,7 +736,7 @@ The following areas may need facts depending on your service:
 - attribute2: value
 
 **References:**
-- F[X].[Y] – [Related fact]
+- F[XYY].[ZZZ] – [Related fact]
 
 **Implementation Notes:**
 - [Language-specific considerations]
@@ -741,7 +746,7 @@ The following areas may need facts depending on your service:
 ### 5.2 Example Fact
 
 ```markdown
-**F20.001] – POST /users
+**FC00.001** – POST /users
 
 **Description:** REST endpoint for creating a new user
 
@@ -751,12 +756,12 @@ The following areas may need facts depending on your service:
 - timeout: 30s
 
 **References:**
-- F23.001 – CreateUserRequest (request schema)
-- F25.001 – UserResponse (response schema)
-- F24.001 – Authorization (required header)
-- F27.005 – 201 Created (success status)
-- F27.007 – 400 Bad Request (validation error)
-- F41.001 – JWT authentication (auth method)
+- FC03.001 – CreateUserRequest (request schema)
+- FC05.001 – UserResponse (response schema)
+- FC04.001 – Authorization (required header)
+- FC07.005 – 201 Created (success status)
+- FC07.007 – 400 Bad Request (validation error)
+- FE01.001 – JWT authentication (auth method)
 
 **Implementation Notes:**
 - Go: Uses gorilla/mux router
@@ -767,6 +772,7 @@ The following areas may need facts depending on your service:
 
 ## Version History
 
-- **v1.0] – Initial taxonomy structure
-- **v1.1] – Added F07 (Configuration), F08 (Logging), enriched all categories
-- **v1.2] – Added F9 (Domain Models), F29 (REST Middleware), F34 (gRPC Interceptors)
+- **v1.0** – Initial taxonomy structure
+- **v1.1** – Added FA07 (Configuration), FA08 (Logging), enriched all categories
+- **v1.2** – Added FB (Domain Models), FC09 (REST Middleware), FD04 (gRPC Interceptors)
+- **v2.0** – Migrated to FXYY.ZZZ format with alphabetic categories

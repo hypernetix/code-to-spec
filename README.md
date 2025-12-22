@@ -13,7 +13,7 @@ This repository is a **spec-driven workflow** for converting a typical REST API 
 ## Core idea: Facts Taxonomy
 
 - **Taxonomy**: see [FACTS_TAXONOMY.md](FACTS_TAXONOMY.md)
-- A **Fact** is a reusable, independently-verifiable behavior/constraint that can be referenced by multiple scenarios using the format `[FXX.YYY]`.
+- A **Fact** is a reusable, independently-verifiable behavior/constraint that can be referenced by multiple scenarios using the format `[FXYY.ZZZ]` where X is an alphabetic category (e.g., FA, FB, FC), YY is a numeric subcategory (00-99), and ZZZ is the sequential fact ID (001-999).
 - The goal is to turn “service logic” into an explicit, portable inventory that can be re-implemented in a new stack.
 
 ---
@@ -123,7 +123,7 @@ Then:
   - keep each individual change as a separate item
   - assign change importance: **MAJOR**, **MODERATE**, **MINOR**
 - reconcile and finalize:
-  - update facts and references to keep `[FXX.YYY]` consistent
+  - update facts and references to keep `[FXYY.ZZZ]` consistent
   - produce the final `NEW_FACTS.md` + `NEW_BEHAVIOR.md` as the source-of-truth for rewriting and/or code generation
 
 ---
@@ -132,7 +132,7 @@ Then:
 
 - This workflow is **language-agnostic** in principle: any “legacy service” can be analyzed into Facts + Scenarios and then re-implemented elsewhere.
 - Whether something is “supported” must be grounded in code: if **license checks**, **quota checks**, **events**, or **audit logs** are not implemented, the spec should say so explicitly.
-- Facts are **append-only** (never renumber IDs); scenarios should reference facts via `[FXX.YYY]` rather than duplicating behavior text.
+- Facts are **append-only** (never renumber IDs); scenarios should reference facts via `[FXYY.ZZZ]` (e.g., `[FA01.001]`, `[FC00.005]`) rather than duplicating behavior text.
 
 ---
 
