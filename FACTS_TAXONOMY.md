@@ -1,10 +1,20 @@
 # Facts Taxonomy for Microservice Migration
 
+## AI Agent Instructions
+
+**Role**: You are a technical analyst and knowledge engineer specializing in extracting, categorizing, and documenting reusable behavioral facts from microservice codebases.
+
+**Task**: Use this taxonomy as a reference guide when extracting facts from source code. Each fact should be independently verifiable, reusable across scenarios, and properly categorized according to this taxonomy.
+
 ## Purpose
 
-This document contains a taxonomy of knowledge about a microservice that is useful for service-to-service comparison or conversion from one programming language to another (e.g., Go to Rust).
+This document contains a comprehensive taxonomy of knowledge about a microservice that is useful for:
+- Service-to-service comparison
+- Language migration (e.g., Go to Rust, Java to Go)
+- Technology stack modernization
+- Behavioral documentation and specification
 
-The facts taxonomy can be also used to explain LLMs what to improve/change during translation
+The facts taxonomy provides a structured framework for AI agents to understand what aspects of a service to document and how to categorize them
 
 ---
 
@@ -17,6 +27,18 @@ A **Fact** is:
 > Something that can change independently and must be referenced by more than one consumer OR verified independently.
 
 **If it doesn't meet this bar → it's an attribute, not a Fact.**
+
+**AI Instructions**: When analyzing code, ask yourself:
+- Is this behavior/rule used in multiple places? → **Fact**
+- Is this specific to one handler/function? → **Attribute**
+- Can this be tested independently? → **Fact**
+- Is this a structural detail of one component? → **Attribute**
+
+**Examples**:
+- ✓ **Fact**: JWT token validation (used by all authenticated endpoints)
+- ✗ **Attribute**: Specific parameter name in one endpoint
+- ✓ **Fact**: Soft-delete filter logic (applied to multiple queries)
+- ✗ **Attribute**: Local variable in a single function
 
 ### 1.2 Promotion Rule (Shared vs Local)
 
@@ -35,31 +57,67 @@ A **Fact** is:
 
 ```
 F X YY . ZZZ
-│  │ │    └── sequential atomic fact ID (numeric)
-│  │ └────── subcategory (numeric)
-│  └──────── category (alphabetic)
-└─────────── Fact
+│ │  │    └── sequential atomic fact ID (001-999)
+│ │  └─────── subcategory (numeric 00-99)
+│ └────────── category (alphabetic A-Z)
+└──────────── Fact prefix
 ```
 
-e.g. 
-`FA01.001` - `A` category, `01`st subcategory and `001`st fact
-`FZ11.030` - `Z` category, `11`th subcategory and `030`th fact
+**Format Rules**:
+- Always use alphabetic category (e.g., A, B, C)
+- Always use 2-digit subcategory (e.g., 00, 01, 15)
+- Always use 3-digit fact ID (e.g., .001, .050, .999)
+- Complete format: `[FA01.001]`, `[FN00.010]`, `[FC07.099]`
 
-**IDs are append-only. Never renumber.**
+**AI Instructions**: 
+- When creating new facts, use the next available sequential number in the appropriate category
+- **CRITICAL**: IDs are append-only. Never renumber existing facts
+- If a category is full (999 facts), create a new subcategory
+- Always include the brackets when referencing: `[FA01.001]` not `FA01.001`
+
+**Examples**:
+- ✓ Correct: `[FA01.001]`, `[FC00.015]`, `[FN00.100]`
+- ✗ Wrong: `[F1.1]`, `[F20.15]`, `FA01.001` (missing brackets)
 
 ---
 
 ## 2. Category Map
 
+**AI Instructions**: This section provides the complete taxonomy of fact categories. When extracting facts from code:
+1. Identify which category the fact belongs to
+2. Assign the next available ID in that category
+3. Document all attributes and references
+4. Cross-reference related facts
+
 ### FA — Context & System Definition
+
+**AI Instructions**: Facts in this category define the overall service context, architecture, and system-level decisions.
 
 #### FA00 — Overview
 
+**Purpose**: High-level service definition and boundaries
+
+**AI Instructions**: Extract these by analyzing:
+- README files, architecture documents
+- Service interfaces and API definitions by scanning the source code
+- Dependency declarations (go.mod, package.json, etc.)
+
+**Facts**:
 - [FA00.001] – Service mission statement
 - [FA00.002] – Bounded context definition
 - [FA00.003] – Non-goals / explicitly unsupported behavior
 - [FA00.004] – Service dependencies map
 - [FA00.005] – Data ownership boundaries
+
+**Example**:
+```markdown
+[FA00.001] Service Mission Statement
+**Description**: User management service responsible for CRUD operations on user entities
+**Attributes**:
+- Primary responsibility: User lifecycle management
+- Bounded context: User domain
+- Not responsible for: Authentication (handled by Auth service)
+```
 
 #### FA01 — Project Facts
 
@@ -178,10 +236,23 @@ Each scenario references:
 
 ### FC — REST API
 
+**AI Instructions**: Facts in this category document REST API endpoints, contracts, and HTTP-specific behavior.
+
 #### FC00 — REST Handlers (TOP-LEVEL FACT)
 
-*Each handler = exactly one Fact*
+**Purpose**: Document each REST endpoint as a distinct fact
 
+**AI Instructions**: 
+- Each unique endpoint (method + path) gets its own fact
+- Extract by analyzing route definitions, HTTP handlers, controller methods
+- Look for: `http.HandleFunc`, `@GetMapping`, `app.get()`, etc.
+
+**Fact Structure**:
+- One fact per endpoint
+- Document method, path, purpose
+- Reference related schemas, auth, and error facts
+
+**Facts**:
 - [FC00.001] – POST /users
 - [FC00.002] – GET /users/{id}
 - [FC00.003] – DELETE /users/{id}
@@ -192,17 +263,37 @@ Each scenario references:
 - [FC00.008] – GET /metrics
 - [FC00.009] – GET /ready
 
-**Attributes (NOT facts):**
-- local-only params
-- local-only headers
-- handler-specific validation
+**What to Document as Attributes (NOT separate facts)**:
+- Handler-specific local variables
+- Endpoint-specific parameter names used only once
+- Internal implementation details
 
-**References:**
-- request schema IDs
-- response schema IDs
-- shared headers
-- auth facts
-- error facts
+**What to Reference as Facts**:
+- Request/response schemas (FC03.xxx, FC05.xxx)
+- Shared query parameters (FC01.xxx)
+- Authentication methods (FE01.xxx)
+- Status codes (FC07.xxx)
+- Middleware (FC09.xxx)
+
+**Example**:
+```markdown
+[FC00.001] POST /users
+**Description**: Creates a new user in the system
+**Attributes**:
+- Method: POST
+- Path: /users
+- Timeout: 30s
+- Handler: handlers.CreateUser
+**References**:
+- [FC03.001] CreateUserRequest (request body)
+- [FC05.001] UserResponse (success response)
+- [FC04.001] Authorization header (required)
+- [FC07.005] 201 Created (success)
+- [FC07.007] 400 Bad Request (validation error)
+- [FE01.001] JWT authentication
+- [FE02.001] Requires 'user:create' permission
+**Code Location**: handlers/user.go:45-78
+```
 
 #### FC01 — REST Request Parameters (SHARED ONLY)
 

@@ -1,17 +1,281 @@
-with openspec:
+# Specification Comparison and Change Management
 
-1. Compare provided specifications - BEHAVIOR and FACTS
-2. Put special attention to changes in APIs, Scenarios and exact FACTS
-3. Put special attention and triple check all the API ROLE checks, DB access check, license checks, quota checks, other conditions in all the "Scenarios". This is key focus
-4. Put special attention and double check you mention properly that soft deleted items are used or not used in every scenario
-5. Put special attention and double check all the outbound communications are well described (sync, async, timeout, error management)
-6. Put special attention and double check all the timeouts and limitations mentioned as well, with references to facts
-7. Put special attention and double check all the events and audit logs are mentioned in all the "Scenarios"
+## AI Agent Instructions
 
-8. Generate new CHANGES.md file with the changes description
-9. Group similar changes. If such broad change detected, put it as separate chapter and mention what places affected
-10. For individual change, keep it as separate item
-11. Set change importance factor for every change: MAJOR, MODERATE, MINOR
-- MAJOR changes - Any Access control, DB Access check, configuration parameters, API incompatible changes
-- MODERATE - likely compatible changes: some new API parameters, new eror types, maybe changes in config structure, but not drastical
-- MINOR - some other behavioral changes
+**Role**: You are a technical analyst and change management specialist with expertise in API evolution and impact analysis.
+
+**Task**: Compare `ORIG_BEHAVIOR.md` with `NEW_BEHAVIOUR.md` (and their respective FACTS files) to identify all differences, categorize changes by impact level, and generate comprehensive change documentation for stakeholders.
+
+## 1. Purpose
+This document outlines the process for comparing specifications, identifying differences, and documenting changes in a structured manner.
+
+## 2. Comparison Process
+
+### 2.1 Core Comparison Areas
+
+**AI Instructions**: Systematically compare these aspects:
+
+1. **API Contracts**
+   - **Added endpoints**: New API endpoints in NEW_BEHAVIOUR.md
+   - **Removed endpoints**: Endpoints present in ORIG but not in NEW
+   - **Modified endpoints**: Changes to existing endpoints (parameters, responses, status codes)
+   - **Request/response schemas**: Field additions, removals, type changes
+   - **Error handling**: New error codes, changed error responses
+
+2. **Scenarios**
+   - **New scenarios**: Scenarios marked with `[NEW]` prefix
+   - **Modified scenarios**: Scenarios marked with `[MODIFIED]` prefix
+   - **Removed scenarios**: Scenarios in ORIG but not in NEW
+   - **Workflow changes**: Altered business logic or process flows
+   - **Validation changes**: New or modified validation rules
+
+3. **Facts**
+   - **New facts**: Facts added in NEW_FACTS.md
+   - **Modified facts**: Facts with changed descriptions or implementations
+   - **Deprecated facts**: Facts no longer referenced
+   - **Fact reference changes**: Scenarios now referencing different facts
+
+### 2.2 Critical Review Areas
+
+#### 2.2.1 Access Controls (**CRITICAL - Always MAJOR if changed**)
+
+**AI Instructions**: Pay special attention to changes in:
+- [ ] **API role checks**: Any change to role requirements or permissions
+- [ ] **Database access permissions**: Changes to row-level security or query filters
+- [ ] **License validation**: New license types or validation logic changes
+- [ ] **Quota enforcement**: Changes to rate limits, quotas, or enforcement mechanisms
+
+**Impact Assessment**: Any change to access controls is automatically **MAJOR** due to security implications.
+
+#### 2.2.2 Data Management
+
+**AI Instructions**: Identify changes in:
+- [ ] **Soft-delete handling**: Changes to how deleted records are queried or filtered
+- [ ] **Data validation**: New validation rules or modified constraints
+- [ ] **State transitions**: Changes to valid state changes or workflows
+
+**Impact Assessment**: 
+- MAJOR: Changes that affect data integrity or existing data queries
+- MODERATE: New validation rules that don't break existing data
+- MINOR: Clarifications or documentation improvements
+
+#### 2.2.3 Integration Points
+
+**AI Instructions**: Document changes in:
+- [ ] **Outbound communications**: New external service calls or modified endpoints
+- [ ] **Protocols**: Changes from sync to async or vice versa
+- [ ] **Timeouts**: Modified timeout values
+- [ ] **Error handling**: New error handling strategies or retry logic
+
+**Impact Assessment**:
+- MAJOR: Changes to existing integration contracts
+- MODERATE: New integrations or optional parameters
+- MINOR: Timeout adjustments or retry logic improvements
+
+#### 2.2.4 Observability
+
+**AI Instructions**: Track changes in:
+- [ ] **Event logging**: New events or changed event payloads
+- [ ] **Audit trails**: Changes to what actions are audited
+- [ ] **Monitoring**: New metrics or changed alerting thresholds
+
+**Impact Assessment**:
+- MAJOR: Removal of audit logs or critical events
+- MODERATE: New events or metrics
+- MINOR: Log format changes or additional context
+
+## 3. Change Documentation
+
+### 3.1 Impact Level Classification
+
+**AI Instructions**: Categorize each change using these criteria:
+
+#### MAJOR Changes (Breaking Changes)
+- **Access control changes**: Any modification to authentication, authorization, roles, or permissions
+- **Database schema changes**: Changes affecting existing data or queries
+- **API contract breaking changes**:
+  - Removed endpoints or parameters
+  - Changed parameter types or requirements
+  - Changed response structures (removed fields)
+  - Changed HTTP status codes for existing scenarios
+- **Configuration changes**: Required configuration updates
+- **Behavioral changes**: Changes to business logic that affect existing functionality
+
+#### MODERATE Changes (Backward Compatible)
+- **New optional API parameters**: Additive changes that don't break existing clients
+- **New endpoints**: Additional functionality without affecting existing endpoints
+- **Additional error types**: New error codes or error details
+- **Enhanced responses**: New optional fields in responses
+- **Configuration additions**: New optional configuration parameters
+- **Performance improvements**: Changes that improve performance without affecting behavior
+
+#### MINOR Changes (Non-Breaking)
+- **Documentation improvements**: Clarifications, examples, or additional details
+- **Internal refactoring**: Code changes with no external impact
+- **Logging enhancements**: Additional logging or improved log messages
+- **Minor bug fixes**: Fixes that don't change expected behavior
+
+### 3.2 CHANGES.md Structure
+
+**AI Instructions**: Generate CHANGES.md with this exact structure:
+
+```markdown
+# Change Log: ORIG → NEW
+
+## Summary
+- **Total Changes**: [number]
+- **MAJOR**: [number] - Breaking changes requiring migration
+- **MODERATE**: [number] - Backward compatible enhancements
+- **MINOR**: [number] - Non-breaking improvements
+
+## MAJOR Changes
+
+### [MAJOR-001] Change Title
+**Category**: Access Control / API Contract / Data Management / Integration
+**Impact**: [Detailed description of who/what is affected]
+**Change Details**:
+- **Before**: [Original behavior]
+- **After**: [New behavior]
+**Affected Scenarios**: [List of scenario names]
+**Affected Facts**: [FXYY.ZZZ], [FXYY.ZZZ]
+**Migration Required**: YES / NO
+**Migration Steps**:
+1. [Step 1]
+2. [Step 2]
+**Testing Focus**: [What needs to be tested]
+
+## MODERATE Changes
+
+### [MODERATE-001] Change Title
+**Category**: API Enhancement / New Feature / Configuration
+**Benefit**: [Value provided by this change]
+**Change Details**:
+- [Description of enhancement]
+**Affected Scenarios**: [List of scenario names]
+**Affected Facts**: [FXYY.ZZZ], [FXYY.ZZZ]
+**Backward Compatible**: YES
+**Adoption Notes**: [How to use the new feature]
+
+## MINOR Changes
+
+### [MINOR-001] Change Title
+**Category**: Documentation / Logging / Internal
+**Description**: [Brief description]
+**Affected Scenarios**: [List if applicable]
+```
+
+## 4. Output Requirements
+
+### 4.1 CHANGES.md
+**AI Instructions**: Generate comprehensive change documentation following the structure in section 3.2
+
+### 4.2 Impact Analysis Report
+
+**AI Instructions**: Create an impact analysis report with this structure:
+
+```markdown
+# Impact Analysis Report
+
+## Executive Summary
+- **Risk Level**: LOW / MEDIUM / HIGH
+- **Breaking Changes**: [number]
+- **Recommended Timeline**: [Immediate / Planned / Long-term]
+- **Estimated Migration Effort**: [Hours/Days]
+
+## Risk Assessment
+
+### High-Risk Changes
+1. **[Change ID]**: [Brief description]
+   - **Risk**: [What could go wrong]
+   - **Mitigation**: [How to reduce risk]
+
+### Medium-Risk Changes
+1. **[Change ID]**: [Brief description]
+   - **Consideration**: [What to watch for]
+
+## Testing Strategy
+
+### Critical Test Areas
+1. **[Area]**: [Why it needs testing]
+   - Test scenarios: [List]
+   - Expected outcomes: [List]
+
+### Regression Testing Focus
+- [Area 1]: [Rationale]
+- [Area 2]: [Rationale]
+
+### Integration Testing
+- [External system 1]: [What to verify]
+- [External system 2]: [What to verify]
+
+## Deployment Recommendations
+
+### Pre-Deployment
+1. [Action item]
+2. [Action item]
+
+### Deployment Strategy
+- **Recommended approach**: [Blue-green / Canary / Rolling / Big bang]
+- **Rationale**: [Why this approach]
+- **Rollback plan**: [How to revert if needed]
+
+### Post-Deployment
+1. [Monitoring checkpoint]
+2. [Validation step]
+
+## Stakeholder Communication
+
+### Development Team
+- [Key information they need]
+
+### QA Team
+- [Testing focus areas]
+
+### Operations Team
+- [Deployment and monitoring considerations]
+
+### Product/Business Team
+- [Feature changes and user impact]
+```
+
+### 4.3 Comparison Matrix
+
+**AI Instructions**: Generate a side-by-side comparison table:
+
+```markdown
+# Specification Comparison Matrix
+
+| Aspect | ORIG | NEW | Change Type | Impact |
+|--------|------|-----|-------------|--------|
+| Endpoint: POST /items | [Description] | [Description] | MODIFIED | MODERATE |
+| Fact: [FA01.001] | [Description] | [Description] | MODIFIED | MAJOR |
+| Scenario: Create Item | [Summary] | [Summary] | MODIFIED | MODERATE |
+```
+
+## 5. Quality Assurance
+
+**AI Instructions**: Before finalizing, verify:
+
+### 5.1 Completeness Checklist
+- ✓ All differences identified (endpoints, scenarios, facts)
+- ✓ Every change has impact level (MAJOR/MODERATE/MINOR)
+- ✓ All MAJOR changes have migration steps
+- ✓ All access control changes flagged as MAJOR
+- ✓ All affected scenarios and facts listed
+- ✓ Risk assessment complete
+- ✓ Testing strategy provided
+- ✓ Deployment recommendations included
+
+### 5.2 Accuracy Checklist
+- ✓ Change categorization follows section 3.1 criteria
+- ✓ Impact descriptions are specific and actionable
+- ✓ Migration steps are complete and testable
+- ✓ No changes missed or duplicated
+- ✓ Fact references use correct format [FXYY.ZZZ]
+
+### 5.3 Clarity Checklist
+- ✓ Each change has clear before/after description
+- ✓ Technical terms are explained
+- ✓ Stakeholder impact is clear
+- ✓ Testing requirements are specific
+- ✓ Migration steps are unambiguous

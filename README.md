@@ -1,4 +1,14 @@
-## code-to-spec (spec-first service conversion)
+# Code-to-Spec (Spec-First Service Conversion)
+
+## 1. Document Index
+
+1. [FACTS_TAXONOMY.md](FACTS_TAXONOMY.md) - Core taxonomy of reusable facts and behaviors
+2. [prompts/1_CODE_TO_SPEC.md](prompts/1_CODE_TO_SPEC.md) - Initial code analysis and spec generation
+3. [prompts/2_VERIFY_ORIG_SPEC.md](prompts/2_VERIFY_ORIG_SPEC.md) - Specification verification and validation
+4. [prompts/3_SPEC_UPGRADE.md](prompts/3_SPEC_UPGRADE.md) - Spec improvement and enhancement
+5. [prompts/4_COMPARE_SPECS.md](prompts/4_COMPARE_SPECS.md) - Specification comparison and change tracking
+
+## 2. Project Overview
 
 This repository is a **spec-driven workflow** for converting a typical REST API microservice (like in Go-lang or Rust) into a specification:
 
@@ -10,17 +20,17 @@ This repository is a **spec-driven workflow** for converting a typical REST API 
 
 ---
 
-## Core idea: Facts Taxonomy
+## 3. Core Concepts
 
 - **Taxonomy**: see [FACTS_TAXONOMY.md](FACTS_TAXONOMY.md)
-- A **Fact** is a reusable, independently-verifiable behavior/constraint that can be referenced by multiple scenarios using the format `[FXYY.ZZZ]` where X is an alphabetic category (e.g., FA, FB, FC), YY is a numeric subcategory (00-99), and ZZZ is the sequential fact ID (001-999).
-- The goal is to turn “service logic” into an explicit, portable inventory that can be re-implemented in a new stack.
+- A **Fact** is a reusable, independently-verifiable behavior/constraint that can be referenced by multiple scenarios using the format `[FXYY.ZZZ]` where XX is an alphabetic category (e.g., FA, FB, FC), YY is a numeric subcategory (00-99), and ZZZ is the sequential fact ID (001-999).
+- The goal is to turn "service logic" into an explicit, portable inventory that can be re-implemented in a new stack.
 
 ---
 
-## Workflow (end-to-end)
+## 4. Workflow (End-to-End)
 
-### Step 0) Install OpenSpec and initialize this workspace
+### Step1: Install OpenSpec and Initialize Workspace
 
 OpenSpec is the CLI used to scaffold and validate specs in this repo.
 
@@ -41,7 +51,7 @@ openspec init
 
 During `openspec init`, select whichever AI tools you plan to use (Cursor/Windsurf/Antigravity). This will set up the `openspec/` folder if and tool-specific slash commands/agent handoffs as needed.
 
-### Step 1) Add your legacy service code as a symlink
+### Step2: Add Legacy Service Code
 
 Keep this repo clean by adding the legacy codebase as a symlink (so the analysis output lives here, but the source stays in its own repo).
 
@@ -54,7 +64,7 @@ ln -s /absolute/path/to/your-orig-service ./legacy-service
 
 From here on, point the agent at `./legacy-service` (or rename it to match your conventions).
 
-### Step 1) Review and update service logic taxonomy if needed
+### Step3: Review Service Logic Taxonomy
 
 Use `FACTS_TAXONOMY.md` as the canonical categorization system for:
 - domain entities
@@ -66,7 +76,7 @@ Use `FACTS_TAXONOMY.md` as the canonical categorization system for:
 - timeouts and limits
 - events and audit logs
 
-### Step 2) Assess existing service behavior (OpenSpec + prompt)
+### Step4: Assess Existing Service Behavior (OpenSpec + prompt)
 
 Open you favorite IDE with agentic mode. Your first instruction should explicitly point it at the symlinked legacy repo and the prompt to use.
 
@@ -77,7 +87,7 @@ Output per analyzed capability/module is typically:
 - `ORIG_BEHAVIOR.md`: “what the current service does” (scenarios, primary/error paths)
 - `ORIG_FACTS.md`: reusable facts extracted from that behavior, referenced by ID in `ORIG_BEHAVIOR.md`
 
-### Step 3) Verify and correct the ORIG spec using cross-checks (multiple LLM passes)
+### Step5: Verify and Correct Specifications (multiple LLM passes)
 
 Use prompt:
 - `prompts/2_VERIFY_ORIG_SPEC.md`
@@ -95,7 +105,7 @@ Goal:
   - **concurrency / thread pooling**
   - and whether **soft-deleted items** are included or excluded
 
-### Step 4) Propose improvements and missing scenarios (spec upgrade)
+### Step6: Propose Improvements (spec upgrade)
 
 Use prompt:
 - `prompts/3_SPEC_UPGRADE.md`
@@ -104,7 +114,7 @@ Output:
 - `NEW_BEHAVIOUR.md` created by copying `ORIG_BEHAVIOR.md` and applying improvements.
 - Every newly introduced step or scenario MUST be marked with a `[NEW]` prefix (so diffs are easy).
 
-### Step 5) Compare specs and prepare final FACTS/BEHAVIOR for code generation
+### Step7: Compare specs and prepare final FACTS/BEHAVIOR for code generation
 
 Use prompt:
 - `prompts/4_COMPARE_SPECS.md`
